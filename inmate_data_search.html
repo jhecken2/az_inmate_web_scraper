@@ -1,0 +1,481 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head id="Head1">
+    <title>
+        Inmate Data Search
+    </title>
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css">
+    <script>
+        function printpr() {
+            var OLECMDID = 7;
+            /* OLECMDID values:
+            * 6 – print
+            * 7 – print preview
+            * 1 – open window
+            * 4 – Save As
+            */
+            var PROMPT = 1; // 2 DONTPROMPTUSER
+            var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH=0 HEIGHT=0 CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+            document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+            WebBrowser1.ExecWB(OLECMDID, PROMPT);
+            WebBrowser1.outerHTML = "";
+        }
+
+    </script>
+
+
+    <style type="text/css">
+        .auto-style1 {
+            height: 23px;
+        }
+
+        .auto-style2 {
+            height: 86px;
+        }
+    </style>
+
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1229.0" data-gr-ext-installed="" data-gr-ext-disabled="forever">
+    <form name="form1" method="post" action="./" id="form1">
+        <div>
+            <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
+                value="/wEPDwUKMTc5MzE3NjQ2Ng9kFgICAw9kFgQCAQ9kFggCAw8PFgIeB1Zpc2libGVoZBYCAgMPDxYCHgRUZXh0ZWRkAgUPDxYCHwBnZGQCCQ9kFgICAQ88KwARAgEQFgAWABYADBQrAABkAg0PDxYCHwBnZBYCAgEPPCsAEQMADxYGHwBnHgtfIURhdGFCb3VuZGceC18hSXRlbUNvdW50AihkARAWABYAFgAMFCsAABYCZg9kFgwCAg9kFhBmD2QWAmYPFQEBMWQCAQ9kFgICAQ8PFgQfAQUGMzI1ODI1Hg9Db21tYW5kQXJndW1lbnQFATBkZAICD2QWAgIBDw8WBB8EBQEwHghJbWFnZVVybAVNaHR0cHM6Ly9xdWlja2Jhc2UtdXBsb2Fkcy5zMy51cy1nb3Ytd2VzdC0xLmFtYXpvbmF3cy5jb20vTXVnUGhvdG9zLzMyNTgyNS5qcGdkZAIDD2QWAgIBDw8WAh8BBQ1Ob3QgU2V0IEFzaWRlZGQCBA8PFgIfAQUFU01JVEhkZAIFDw8WAh8BBQlKQUNPQiwgRy5kZAIGD2QWAgIBDw8WAh8BBQowMy8xNC8yMDE4ZGQCBw9kFgICAQ8PFgIfAQUGMzI1ODI1ZGQCAw9kFhBmD2QWAmYPFQEBMmQCAQ9kFgICAQ8PFgQfAQUGMzYxMDUxHwQFATFkZAICD2QWAgIBDw8WBB8EBQExHwUFTWh0dHBzOi8vcXVpY2tiYXNlLXVwbG9hZHMuczMudXMtZ292LXdlc3QtMS5hbWF6b25hd3MuY29tL011Z1Bob3Rvcy8zNjEwNTEuanBnZGQCAw9kFgICAQ8PFgIfAQUNTm90IFNldCBBc2lkZWRkAgQPDxYCHwEFBVNNSVRIZGQCBQ8PFgIfAQUJSkFLT0IsIFIuZGQCBg9kFgICAQ8PFgIfAQUKMDQvMjAvMjAyM2RkAgcPZBYCAgEPDxYCHwEFBjM2MTA1MWRkAgQPZBYQZg9kFgJmDxUBATNkAgEPZBYCAgEPDxYEHwEFBjM2NzIzMR8EBQEyZGQCAg9kFgICAQ8PFgQfBAUBMh8FBU1odHRwczovL3F1aWNrYmFzZS11cGxvYWRzLnMzLnVzLWdvdi13ZXN0LTEuYW1hem9uYXdzLmNvbS9NdWdQaG90b3MvMzY3MjMxLmpwZ2RkAgMPZBYCAgEPDxYCHwEFDU5vdCBTZXQgQXNpZGVkZAIEDw8WAh8BBQVTTUlUSGRkAgUPDxYCHwEFBUpBTUFSZGQCBg9kFgICAQ8PFgIfAQUKMDMvMTEvMjAyNGRkAgcPZBYCAgEPDxYCHwEFBjM2NzIzMWRkAgUPZBYQZg9kFgJmDxUBATRkAgEPZBYCAgEPDxYEHwEFBjEyMDI5MB8EBQEzZGQCAg9kFgICAQ8PFgQfBAUBMx8FBU1odHRwczovL3F1aWNrYmFzZS11cGxvYWRzLnMzLnVzLWdvdi13ZXN0LTEuYW1hem9uYXdzLmNvbS9NdWdQaG90b3MvMTIwMjkwLmpwZ2RkAgMPZBYCAgEPDxYCHwEFDU5vdCBTZXQgQXNpZGVkZAIEDw8WAh8BBQVTTUlUSGRkAgUPDxYCHwEFCUpBTUVTLCBDLmRkAgYPZBYCAgEPDxYCHwEFCjAzLzE2LzIwMjNkZAIHD2QWAgIBDw8WAh8BBQYxMjAyOTBkZAIGD2QWEGYPZBYCZg8VAQE1ZAIBD2QWAgIBDw8WBB8BBQYyNDYxNjUfBAUBNGRkAgIPZBYCAgEPDxYEHwQFATQfBQVNaHR0cHM6Ly9xdWlja2Jhc2UtdXBsb2Fkcy5zMy51cy1nb3Ytd2VzdC0xLmFtYXpvbmF3cy5jb20vTXVnUGhvdG9zLzI0NjE2NS5qcGdkZAIDD2QWAgIBDw8WAh8BBQ1Ob3QgU2V0IEFzaWRlZGQCBA8PFgIfAQUFU01JVEhkZAIFDw8WAh8BBQlKQU1FUywgRS5kZAIGD2QWAgIBDw8WAh8BBQowOS8xNC8yMDA5ZGQCBw9kFgICAQ8PFgIfAQUGMjQ2MTY1ZGQCBw8PFgIfAGhkZAIDD2QWGAIODzwrABECARAWABYAFgAMFCsAAGQCEA88KwARAgEQFgAWABYADBQrAABkAhIPPCsAEQIBEBYAFgAWAAwUKwAAZAIUDzwrABECARAWABYAFgAMFCsAAGQCFw88KwARAgEQFgAWABYADBQrAABkAigPPCsAEQIBEBYAFgAWAAwUKwAAZAIwDzwrABECARAWABYAFgAMFCsAAGQCOA88KwARAgEQFgAWABYADBQrAABkAkAPPCsAEQIBEBYAFgAWAAwUKwAAZAJGDzwrABECARAWABYAFgAMFCsAAGQCTQ88KwARAgEQFgAWABYADBQrAABkAlMPPCsAEQIBEBYAFgAWAAwUKwAAZBgPBQ1HVldvcmtQcm9ncmFtD2dkBQlHcmlkVmlldzgPZ2QFCUdyaWRWaWV3OQ9nZAUKR3JpZFZpZXcxMQ9nZAUKR1ZEZXRhaW5lcg9nZAUMR1ZDb21taXRtZW50D2dkBQpndlNldEFzaWRlD2dkBQ1HVkluZnJhY3Rpb25zD2dkBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WBQUYZ3ZJbm1hdGUkY3RsMDMkSW1hZ2VJTU5PBRhndklubWF0ZSRjdGwwNCRJbWFnZUlNTk8FGGd2SW5tYXRlJGN0bDA1JEltYWdlSU1OTwUYZ3ZJbm1hdGUkY3RsMDYkSW1hZ2VJTU5PBRhndklubWF0ZSRjdGwwNyRJbWFnZUlNTk8FCUdyaWRWaWV3Nw9nZAUIR1ZBcHBlYWwPZ2QFCkdyaWRWaWV3MTIPZ2QFDkdWUGFyb2xlQWN0aW9uD2dkBQ5HVlByb2ZpbGVDbGFzcw9nZAUIZ3ZJbm1hdGUPPCsADAEIAghk24oyhlUMtPI2WApYF0xeXFjyOJCAY5qv/tyY5xyPGxU=">
+        </div>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var theForm = document.forms['form1'];
+            if (!theForm) {
+                theForm = document.form1;
+            }
+            function __doPostBack(eventTarget, eventArgument) {
+                if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                    theForm.__EVENTTARGET.value = eventTarget;
+                    theForm.__EVENTARGUMENT.value = eventArgument;
+                    theForm.submit();
+                }
+            }
+            //]]>
+        </script>
+
+
+        <script
+            src="/WebResource.axd?d=UfrHaTrnInHdDOmmR4l_J3oqLH8-To9zlvuCm5AYZlF15V1awobFKvIDdvx19zqJ-NzVVsKgHBk45sIfAU48l_QaHFm_-hLYTDU4k6Ewpek1&amp;t=636725672369752514"
+            type="text/javascript"></script>
+
+
+        <script
+            src="/WebResource.axd?d=Eb1lXT-TBvrpstz7-jVcu8tdJQIAlKAT4nWOSZKq1nAQBTRYhNWdfUv45bs2M41mRFMRxPmeiCze_hDbEvOlCKl15KhW_Z-yy90C66kFrT41&amp;t=636725672369752514"
+            type="text/javascript"></script>
+        <div>
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="8DCDC405">
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                value="/wEdAB6CHEQ24a1rR3ZZufw7tOQtZ9JwVB6ZKdaJbn5fC6r4+Z5JaA8yZfJnYc6ToL+hQl9yBB3neGyqx4ZWCAkhz09bbtzQU/5irnVUrgSrgDQhre+T/nIJVLKhZp5RVCC+0Hl57NhA0m6cJHsim3E6qVBFV2MBy5o+xTCm65Uc89ghoBJ/hM1z/oADy7rRmwM1m04DpRnQ6+ZgGOaFxGLeMhKkxZc8yNswdxmx+1FSUwOxxWI5jCUXfjDECIs9qG4AdOqds1nLTR9csoAoJn3YLTObBKRwUqTmb9eEl+adrnELziZJlNSrIp8V463re3To+3B8KnubnUp4/ngLUmG2NSb/MeZTvkGDcoVsSsRXZcawZ1tXPzwuwZwwneqKS9qfbJOkTnbR5X2vhp0kzzgGeCZsud4ZzBSYD6OOpr9u6vS+lcNxLokK9+mwTHvN6dbnklzH2dvai/Ymd3sFrqBG1ncye1hAebGSb49c1YlA1BLZtZBQo1Lz6Biz0Jy4bVzcxouLcO37ltpuCfPO4tSYbMS67KVJMG8QONUWcnmImc2KFIDpPr2hwjYf+YG/4MRoyxbDrXMvgKLcwBw6BLdgxxf95+MHkdii6tqSjCmtEsWP1kymEoIegfGa6Brh06b1tg86EFBor3+yK2YXqlaR8+tlSOPyEfPGrN1J2LZFhzwIuQ==">
+        </div>
+        <table style="text-align: left">
+            <tbody>
+                <tr>
+                    <td>
+                        <div id="pnlSearch" style="width:615px;">
+
+                            <table style="text-align: left">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <div id="pnlFirst" style="width:610px;">
+
+                                                <table style="text-align: center" class="SmallBorder">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="submit" name="btnSearchNumber"
+                                                                    value="Search by ADC Number" id="btnSearchNumber"
+                                                                    class="ButtonClass" style="width:300px;">
+                                                            </td>
+                                                            <td>
+                                                                <input type="submit" name="btnSearchName"
+                                                                    value="Search by Name" id="btnSearchName"
+                                                                    class="ButtonClass" style="width:300px;">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <div id="pnlName"
+                                                onkeypress="javascript:return WebForm_FireDefaultButton(event, 'btnName')"
+                                                style="width:610px;">
+
+                                                <table class="BorderGridView" align="center">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="LabelSearch" style="text-align: center">
+                                                                <span id="Label3" class="LabelSearch">NAME SEARCH</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span id="Label4"
+                                                                                    class="LabelLarge">Last Name</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input name="txtLName" type="text"
+                                                                                    value="Smith" maxlength="20"
+                                                                                    id="txtLName"
+                                                                                    title="Enter a Last Name"
+                                                                                    style="height:25px;width:84px;">
+                                                                            </td>
+                                                                            <td>
+                                                                                <span id="Label5"
+                                                                                    class="LabelLarge">First
+                                                                                    Initial</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input name="txtFName" type="text"
+                                                                                    value="J" maxlength="1"
+                                                                                    id="txtFName"
+                                                                                    title="Enter a First Name"
+                                                                                    style="height:25px;width:84px;">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="button" name="btnName"
+                                                                                    value="Search"
+                                                                                    onclick="javascript:__doPostBack('btnName','')"
+                                                                                    id="btnName" class="LabelLargeBold"
+                                                                                    style="width:90px;">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="button" name="btnClearName"
+                                                                                    value="Clear"
+                                                                                    onclick="javascript:__doPostBack('btnClearName','')"
+                                                                                    id="btnClearName"
+                                                                                    class="LabelLargeBold"
+                                                                                    style="width:90px;">
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table align="center">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="ButtonBack">
+                                                                                <span id="Label6">Gender</span>
+                                                                            </td>
+                                                                            <td class="ButtonBack">&nbsp;<span
+                                                                                    id="Label7">Current Status</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="SmallBorder">
+                                                                                <table id="rblGender" border="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td><input id="rblGender_0"
+                                                                                                    type="radio"
+                                                                                                    name="rblGender"
+                                                                                                    value="Male"
+                                                                                                    checked="checked"><label
+                                                                                                    for="rblGender_0">Male</label>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td><input id="rblGender_1"
+                                                                                                    type="radio"
+                                                                                                    name="rblGender"
+                                                                                                    value="Female"><label
+                                                                                                    for="rblGender_1">Female</label>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                            <td class="SmallBorder">
+                                                                                <table id="rblStaus" border="0"
+                                                                                    style="text-align: left">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td><input id="rblStaus_0"
+                                                                                                    type="radio"
+                                                                                                    name="rblStaus"
+                                                                                                    value="Active"
+                                                                                                    checked="checked"><label
+                                                                                                    for="rblStaus_0">Active</label>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td><input id="rblStaus_1"
+                                                                                                    type="radio"
+                                                                                                    name="rblStaus"
+                                                                                                    value="Inactive"><label
+                                                                                                    for="rblStaus_1">Inactive</label>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <div id="pnlGV" style="color:White;width:610px;text-align: left">
+
+                                                <div>
+                                                    <table class="BorderGridView" cellspacing="0" cellpadding="3"
+                                                        align="Center" rules="cols" border="1" id="gvInmate"
+                                                        style="color:Black;background-color:White;font-family:Arial;font-size:Medium;width:578px;border-collapse:collapse;">
+                                                        <tbody>
+                                                            <tr align="center"
+                                                                style="color:Black;background-color:#999999;">
+                                                                <td colspan="6">
+                                                                    <table border="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><span>1</span></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$2')"
+                                                                                        style="color:Black;">2</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$3')"
+                                                                                        style="color:Black;">3</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$4')"
+                                                                                        style="color:Black;">4</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$5')"
+                                                                                        style="color:Black;">5</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$6')"
+                                                                                        style="color:Black;">6</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$7')"
+                                                                                        style="color:Black;">7</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$8')"
+                                                                                        style="color:Black;">8</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="GridViewHead" align="center">
+                                                                <th align="right" scope="col">#</th>
+                                                                <th align="center" scope="col" style="color:White;">
+                                                                    Inmate Info</th>
+                                                                <th align="center" scope="col">Photo</th>
+                                                                <th scope="col">Last Name</th>
+                                                                <th scope="col">First Name,MI</th>
+                                                                <th scope="col">Admitted</th>
+                                                            </tr>
+                                                            <tr class="GridViewRow" align="center" style="width:578px;">
+                                                                <td align="right">
+                                                                    1
+                                                                </td>
+                                                                <td align="center" style="color:Red;">
+                                                                    <a id="gvInmate_ctl03_LinkNumber"
+                                                                        href="javascript:__doPostBack('gvInmate$ctl03$LinkNumber','')"
+                                                                        style="color:Red;">325825</a>
+                                                                </td>
+                                                                <td align="center" style="font-size:XX-Small;">
+                                                                    <input type="image" name="gvInmate$ctl03$ImageIMNO"
+                                                                        id="gvInmate_ctl03_ImageIMNO"
+                                                                        src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/325825.jpg"
+                                                                        alt="Photo not available"
+                                                                        style="border-color:Red;border-width:1pt;border-style:Solid;height:70px;width:80px;">
+                                                                </td>
+                                                                <td>SMITH</td>
+                                                                <td>JACOB, G.</td>
+                                                                <td>
+                                                                    <span id="gvInmate_ctl03_Admitted">03/14/2018</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="GridViewRow" align="center"
+                                                                style="background-color:#CCCCCC;width:578px;">
+                                                                <td align="right">
+                                                                    2
+                                                                </td>
+                                                                <td align="center" style="color:Red;">
+                                                                    <a id="gvInmate_ctl04_LinkNumber"
+                                                                        href="javascript:__doPostBack('gvInmate$ctl04$LinkNumber','')"
+                                                                        style="color:Red;">361051</a>
+                                                                </td>
+                                                                <td align="center" style="font-size:XX-Small;">
+                                                                    <input type="image" name="gvInmate$ctl04$ImageIMNO"
+                                                                        id="gvInmate_ctl04_ImageIMNO"
+                                                                        src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/361051.jpg"
+                                                                        alt="Photo not available"
+                                                                        style="border-color:Red;border-width:1pt;border-style:Solid;height:70px;width:80px;">
+                                                                </td>
+                                                                <td>SMITH</td>
+                                                                <td>JAKOB, R.</td>
+                                                                <td>
+                                                                    <span id="gvInmate_ctl04_Admitted">04/20/2023</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="GridViewRow" align="center" style="width:578px;">
+                                                                <td align="right">
+                                                                    3
+                                                                </td>
+                                                                <td align="center" style="color:Red;">
+                                                                    <a id="gvInmate_ctl05_LinkNumber"
+                                                                        href="javascript:__doPostBack('gvInmate$ctl05$LinkNumber','')"
+                                                                        style="color:Red;">367231</a>
+                                                                </td>
+                                                                <td align="center" style="font-size:XX-Small;">
+                                                                    <input type="image" name="gvInmate$ctl05$ImageIMNO"
+                                                                        id="gvInmate_ctl05_ImageIMNO"
+                                                                        src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/367231.jpg"
+                                                                        alt="Photo not available"
+                                                                        style="border-color:Red;border-width:1pt;border-style:Solid;height:70px;width:80px;">
+                                                                </td>
+                                                                <td>SMITH</td>
+                                                                <td>JAMAR</td>
+                                                                <td>
+                                                                    <span id="gvInmate_ctl05_Admitted">03/11/2024</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="GridViewRow" align="center"
+                                                                style="background-color:#CCCCCC;width:578px;">
+                                                                <td align="right">
+                                                                    4
+                                                                </td>
+                                                                <td align="center" style="color:Red;">
+                                                                    <a id="gvInmate_ctl06_LinkNumber"
+                                                                        href="javascript:__doPostBack('gvInmate$ctl06$LinkNumber','')"
+                                                                        style="color:Red;">120290</a>
+                                                                </td>
+                                                                <td align="center" style="font-size:XX-Small;">
+                                                                    <input type="image" name="gvInmate$ctl06$ImageIMNO"
+                                                                        id="gvInmate_ctl06_ImageIMNO"
+                                                                        src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/120290.jpg"
+                                                                        alt="Photo not available"
+                                                                        style="border-color:Red;border-width:1pt;border-style:Solid;height:70px;width:80px;">
+                                                                </td>
+                                                                <td>SMITH</td>
+                                                                <td>JAMES, C.</td>
+                                                                <td>
+                                                                    <span id="gvInmate_ctl06_Admitted">03/16/2023</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="GridViewRow" align="center" style="width:578px;">
+                                                                <td align="right">
+                                                                    5
+                                                                </td>
+                                                                <td align="center" style="color:Red;">
+                                                                    <a id="gvInmate_ctl07_LinkNumber"
+                                                                        href="javascript:__doPostBack('gvInmate$ctl07$LinkNumber','')"
+                                                                        style="color:Red;">246165</a>
+                                                                </td>
+                                                                <td align="center" style="font-size:XX-Small;">
+                                                                    <input type="image" name="gvInmate$ctl07$ImageIMNO"
+                                                                        id="gvInmate_ctl07_ImageIMNO"
+                                                                        src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/246165.jpg"
+                                                                        alt="Photo not available"
+                                                                        style="border-color:Red;border-width:1pt;border-style:Solid;height:70px;width:80px;">
+                                                                </td>
+                                                                <td>SMITH</td>
+                                                                <td>JAMES, E.</td>
+                                                                <td>
+                                                                    <span id="gvInmate_ctl07_Admitted">09/14/2009</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr align="center"
+                                                                style="color:Black;background-color:#999999;">
+                                                                <td colspan="6">
+                                                                    <table border="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><span>1</span></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$2')"
+                                                                                        style="color:Black;">2</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$3')"
+                                                                                        style="color:Black;">3</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$4')"
+                                                                                        style="color:Black;">4</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$5')"
+                                                                                        style="color:Black;">5</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$6')"
+                                                                                        style="color:Black;">6</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$7')"
+                                                                                        style="color:Black;">7</a></td>
+                                                                                <td><a href="javascript:__doPostBack('gvInmate','Page$8')"
+                                                                                        style="color:Black;">8</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <script type="text/javascript">
+            //<![CDATA[
+            WebForm_AutoFocus('txtNumber');//]]>
+        </script>
+    </form>
+
+
+    <div id="hl-aria-live-message-container" aria-live="polite" class="visually-hidden"></div>
+    <div id="hl-aria-live-alert-container" role="alert" aria-live="assertive" class="visually-hidden"></div>
+</body>
+
+</html>
