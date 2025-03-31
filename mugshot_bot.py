@@ -117,50 +117,62 @@ class InmateScraper:
             time.sleep(3)
             
             inmates = []
+            page_count = 0
             
-            try:
-                # TODO: Add page iteration for multiple pages of table results
-                table = WebDriverWait(self.driver, 5).until(
-                    EC.presence_of_element_located((By.XPATH, "//table[@id='gvInmate']"))
-                )
+            while True:
+                try:
+                    table = WebDriverWait(self.driver, 5).until(
+                        EC.presence_of_element_located((By.XPATH, "//table[@id='gvInmate']"))
+                    )
+                    
+                    rows = table.find_elements(By.XPATH, "//tr[@class='GridViewRow']")
+                    for row in rows:
+                        cells = row.find_elements(By.TAG_NAME, "td")[1:]
+                        if len(cells) >= 5:
+                            try:
+                                inmate_id_link = cells[0].find_element(By.TAG_NAME, "a")
+                                inmate_id = inmate_id_link.text.strip()
+                            except:
+                                inmate_id = cells[0].text.strip()
+                            
+                            try:
+                                photo_element = cells[1].find_element(By.TAG_NAME, "input")
+                                photo_url = photo_element.get_attribute("src")
+                                photo_filename = f"{inmate_id}.jpg"
+                                self._download_photo(photo_url, photo_filename)
+                            except Exception as e:
+                                print(f"Error downloading photo for inmate {inmate_id}: {e}")
+                                photo_filename = None
+                            
+                            last_name = cells[2].text.strip()
+                            first_name = cells[3].text.strip()
+                            admitted_date = cells[4].text.strip()
+                            
+                            inmate_data = {
+                                "inmate_id": inmate_id,
+                                "last_name": last_name,
+                                "first_name": first_name,
+                                "admitted_date": admitted_date,
+                                "photo_filename": photo_filename
+                            }
+                            
+                            inmates.append(inmate_data)
+                            print(f"Found inmate: {first_name} {last_name} (ID: {inmate_id})")
+                    
+                    page_table = table.find_element(By.XPATH, "//td[@colspan='6']")
+                    page_links = page_table.find_elements(By.TAG_NAME, "td")
+                    if page_links[page_count].text.strip() != str(page_count + 1) or page_count >= len(page_links) - 1:
+                        print(f"No more pages to process. Total pages processed: {page_count + 1}")
+                        break
+                    else:
+                        page_count += 1
+                        next_page_btn = self.driver.find_element(By.XPATH, f"//a[contains(text(), '{page_count + 1}')]")
+                        next_page_btn.click()
+                        time.sleep(1)
                 
-                rows = table.find_elements(By.XPATH, "//tr[@class='GridViewRow']")
-                for row in rows:
-                    cells = row.find_elements(By.TAG_NAME, "td")[1:]
-                    if len(cells) >= 5:
-                        try:
-                            inmate_id_link = cells[0].find_element(By.TAG_NAME, "a")
-                            inmate_id = inmate_id_link.text.strip()
-                            print(inmate_id)
-                        except:
-                            inmate_id = cells[0].text.strip()
-                        
-                        try:
-                            photo_element = cells[1].find_element(By.TAG_NAME, "input")
-                            photo_url = photo_element.get_attribute("src")
-                            photo_filename = f"{inmate_id}.jpg"
-                            self._download_photo(photo_url, photo_filename)
-                        except Exception as e:
-                            print(f"Error downloading photo for inmate {inmate_id}: {e}")
-                            photo_filename = None
-                        
-                        last_name = cells[2].text.strip()
-                        first_name = cells[3].text.strip()
-                        admitted_date = cells[4].text.strip()
-                        
-                        inmate_data = {
-                            "inmate_id": inmate_id,
-                            "last_name": last_name,
-                            "first_name": first_name,
-                            "admitted_date": admitted_date,
-                            "photo_filename": photo_filename
-                        }
-                        
-                        inmates.append(inmate_data)
-                        print(f"Found inmate: {first_name} {last_name} (ID: {inmate_id})")
-                        
-            except Exception as e:
-                print(f"No results found or error: {e}")
+                except Exception as e:
+                    print(f"No results found or error: {e}")
+                    break
             
             return inmates
             
@@ -190,14 +202,18 @@ class InmateScraper:
             return False
     
     def close(self):
-        """Close the browser"""
         self.driver.quit()
 
 if __name__ == "__main__":
     scraper = InmateScraper()
     
-    last_names = ["Smith"]
-    first_initials = ["J"]
+    last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", 
+                 "Garcia", "Miller", "Davis", "Rodriguez", "Wilson",
+                 "Martinez", "Hernandez", "Lopez", "Gonzalez", "Perez",
+                 "Taylor", "Anderson", "Thomas", "Jackson", "White"]
+    first_initials = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                    "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+                    "U", "V", "W", "X", "Y", "Z"] 
     
     try:
         results = scraper.search_inmates(last_names, first_initials)
