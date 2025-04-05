@@ -1,0 +1,797 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head id="Head1">
+    <title>
+        Inmate Data Search
+    </title>
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css">
+    <script>
+        function printpr() {
+            var OLECMDID = 7;
+            /* OLECMDID values:
+            * 6 – print
+            * 7 – print preview
+            * 1 – open window
+            * 4 – Save As
+            */
+            var PROMPT = 1; // 2 DONTPROMPTUSER
+            var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH=0 HEIGHT=0 CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+            document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+            WebBrowser1.ExecWB(OLECMDID, PROMPT);
+            WebBrowser1.outerHTML = "";
+        }
+
+    </script>
+
+
+    <style type="text/css">
+        .auto-style1 {
+            height: 23px;
+        }
+
+        .auto-style2 {
+            height: 86px;
+        }
+    </style>
+
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1230.0" data-gr-ext-installed="" data-gr-ext-disabled="forever">
+    <form name="form1" method="post" action="./" id="form1">
+        <div>
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
+                value="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">
+        </div>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var theForm = document.forms['form1'];
+            if (!theForm) {
+                theForm = document.form1;
+            }
+            function __doPostBack(eventTarget, eventArgument) {
+                if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                    theForm.__EVENTTARGET.value = eventTarget;
+                    theForm.__EVENTARGUMENT.value = eventArgument;
+                    theForm.submit();
+                }
+            }
+            //]]>
+        </script>
+
+
+        <script
+            src="/WebResource.axd?d=UfrHaTrnInHdDOmmR4l_J3oqLH8-To9zlvuCm5AYZlF15V1awobFKvIDdvx19zqJ-NzVVsKgHBk45sIfAU48l_QaHFm_-hLYTDU4k6Ewpek1&amp;t=636725672369752514"
+            type="text/javascript"></script>
+
+
+        <script
+            src="/WebResource.axd?d=Eb1lXT-TBvrpstz7-jVcu8tdJQIAlKAT4nWOSZKq1nAQBTRYhNWdfUv45bs2M41mRFMRxPmeiCze_hDbEvOlCKl15KhW_Z-yy90C66kFrT41&amp;t=636725672369752514"
+            type="text/javascript"></script>
+        <div>
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="8DCDC405">
+            <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                value="/wEdAAVey7NUMFwNqcxWpQMLIQwE+I7vqA9HMoUJcrU0ZmiljjfVuKie2gYzfJVp/sCHAwVPcHqP1P17eFUyYz1GNbk4/XGyS3i61Yr7bURteATyzKspQ+D3swPpUCQ5cpnWVOw6I+G48kFspqNvFLijjQHM">
+        </div>
+        <table style="text-align: left">
+            <tbody>
+                <tr>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="pnlResult" style="width:615px;">
+
+                            <table class="SmallBorder">
+                                <tbody>
+                                    <tr style="text-align: left">
+                                        <td>
+                                            <table style="text-align: left">
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td>
+                                                            <input type="submit" name="btnBackToSearch"
+                                                                value="Back To Inmate Data Search" id="btnBackToSearch"
+                                                                class="ButtonBack" style="width:287px;">
+                                                        </td>
+                                                        <td>
+                                                            <input type="submit" name="btnPrintInmate"
+                                                                value="Full View/Print Preview" id="btnPrintInmate"
+                                                                class="ButtonBack" style="width:287px;">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <table style="text-align: left; width: 590px;" class="BorderGridView">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="vertical-align: top"
+                                                                            class="auto-style1">
+                                                                            <table style="text-align:center">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <input type="image"
+                                                                                                name="ImgIMNOResult"
+                                                                                                id="ImgIMNOResult"
+                                                                                                class="BorderGridView"
+                                                                                                src="https://quickbase-uploads.s3.us-gov-west-1.amazonaws.com/MugPhotos/363906.jpg"
+                                                                                                alt="Photo unavailable"
+                                                                                                style="border-color:#CC3300;border-width:3px;border-style:Double;height:136px;width:100px;">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <span id="lblInmage"
+                                                                                                style="color:Gray;background-color:#D6D6D6;border-color:#CC3300;font-size:Medium;">Inmate
+                                                                                                363906</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <span id="lblMessage"
+                                                                                                style="color:#FF3300;background-color:#D6D6D6;border-color:#CC3300;font-size:Medium;"></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td style="vertical-align: top"
+                                                                            class="auto-style1">
+                                                                            <table style="text-align:left;">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <table
+                                                                                                    class="BorderGridView"
+                                                                                                    cellspacing="0"
+                                                                                                    align="Left"
+                                                                                                    rules="all"
+                                                                                                    border="1"
+                                                                                                    id="GridView7"
+                                                                                                    style="background-color:White;width:100%;border-collapse:collapse;">
+                                                                                                    <tbody>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Last
+                                                                                                                Name
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                First
+                                                                                                                Name
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Middle
+                                                                                                                Initial
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewRow"
+                                                                                                            align="center">
+                                                                                                            <td
+                                                                                                                style="color:#AA0000;font-weight:bold;">
+                                                                                                                SMITH
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                style="color:#AA0000;font-weight:bold;">
+                                                                                                                JOSIAH
+                                                                                                            </td>
+                                                                                                            <td>A.</td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <table
+                                                                                                    class="BorderGridView"
+                                                                                                    cellspacing="0"
+                                                                                                    cellpadding="1"
+                                                                                                    align="Left"
+                                                                                                    rules="all"
+                                                                                                    border="1"
+                                                                                                    id="GridView8"
+                                                                                                    style="background-color:White;width:100%;border-collapse:collapse;">
+                                                                                                    <tbody>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Gender
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Height
+                                                                                                                (inches)
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Weight
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Hair
+                                                                                                                Color
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewRow"
+                                                                                                            align="center">
+                                                                                                            <td>Male
+                                                                                                            </td>
+                                                                                                            <td>5 f 9
+                                                                                                            </td>
+                                                                                                            <td>175</td>
+                                                                                                            <td>Black
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <table
+                                                                                                    class="BorderGridView"
+                                                                                                    cellspacing="0"
+                                                                                                    cellpadding="1"
+                                                                                                    align="Left"
+                                                                                                    rules="all"
+                                                                                                    border="1"
+                                                                                                    id="GridView9"
+                                                                                                    style="background-color:White;width:100%;border-collapse:collapse;">
+                                                                                                    <tbody>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Eye
+                                                                                                                Color
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Ethnic
+                                                                                                                Origin
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Custody
+                                                                                                                Class
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Admission
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewRow"
+                                                                                                            align="center">
+                                                                                                            <td>Brown
+                                                                                                            </td>
+                                                                                                            <td>Black
+                                                                                                            </td>
+                                                                                                            <td>Close/High
+                                                                                                            </td>
+                                                                                                            <td>09/20/23
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <table
+                                                                                                    class="BorderGridView"
+                                                                                                    cellspacing="0"
+                                                                                                    cellpadding="1"
+                                                                                                    align="Left"
+                                                                                                    rules="all"
+                                                                                                    border="1"
+                                                                                                    id="GridView11"
+                                                                                                    style="background-color:White;width:100%;border-collapse:collapse;">
+                                                                                                    <tbody>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <td colspan="2"
+                                                                                                                style="color:#FFCC00;background-color:#121F4D;">
+                                                                                                                Projected
+                                                                                                                Eligible
+                                                                                                                Release
+                                                                                                                Date
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Prison
+                                                                                                                Release
+                                                                                                                Date
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Release
+                                                                                                                Type
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewRow"
+                                                                                                            align="center">
+                                                                                                            <td>01/25/2029
+                                                                                                            </td>
+                                                                                                            <td>ADD</td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <table
+                                                                                                    class="BorderGridView"
+                                                                                                    cellspacing="0"
+                                                                                                    cellpadding="1"
+                                                                                                    align="Left"
+                                                                                                    rules="all"
+                                                                                                    border="1"
+                                                                                                    id="GridView12"
+                                                                                                    style="background-color:White;width:100%;border-collapse:collapse;">
+                                                                                                    <tbody>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <td colspan="2"
+                                                                                                                style="color:#FFCC00;background-color:#121F4D;">
+                                                                                                                Most
+                                                                                                                Recent
+                                                                                                                Location
+                                                                                                            </td>
+                                                                                                            <td colspan="2"
+                                                                                                                style="color:#FFCC00;background-color:#121F4D;">
+                                                                                                                As of
+                                                                                                                Date
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewHead"
+                                                                                                            align="center">
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Complex
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Unit
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Last
+                                                                                                                Movement
+                                                                                                            </th>
+                                                                                                            <th
+                                                                                                                scope="col">
+                                                                                                                Status
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                        <tr class="GridViewRow"
+                                                                                                            align="center">
+                                                                                                            <td>
+                                                                                                                <span
+                                                                                                                    id="GridView12_ctl03_Location">YUMA</span>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <span
+                                                                                                                    id="GridView12_ctl03_lblUnit">YUMA
+                                                                                                                    CHEYENNE</span>
+                                                                                                            </td>
+                                                                                                            <td>02/06/2025
+                                                                                                            </td>
+                                                                                                            <td>Active
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+
+                                                                                            <table class="SmallBorder">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td class="GridViewHead"
+                                                                                                            style="text-align: center">
+                                                                                                            <span
+                                                                                                                id="LbLocationMap">Inmate
+                                                                                                                Mailing
+                                                                                                                Address</span>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td
+                                                                                                            class="auto-style2">
+                                                                                                            <textarea
+                                                                                                                name="txtUnitMap"
+                                                                                                                rows="2"
+                                                                                                                cols="20"
+                                                                                                                readonly="readonly"
+                                                                                                                id="txtUnitMap"
+                                                                                                                class="GridViewRow"
+                                                                                                                style="font-weight:bold;height:78px;width:429px;">ASPC Yuma, Cheyenne Unit
+JOSIAH A. SMITH 363906
+PO Box 8909
+Yuma, AZ 85349
+United States</textarea>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table align="left" class="BorderGridView">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="TextStyleBlack"><span>Earned Credit
+                                                                                Release Date is provided for guidance.
+                                                                                Confirmation can be sought by contacting
+                                                                                ADCRR.</span>
+
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="TextStyleRed"><span>It is important
+                                                                                to note that all Release Dates are
+                                                                            </span><b><i><span>projected</span></i></b><span>
+                                                                                and are </span><i><b><span>subject to
+                                                                                        change</span></b></i><span
+                                                                                class="TextStyleRed">; confirm with
+                                                                                ADCRR Time Computation Unit or the
+                                                                                Offender Information Unit where the
+                                                                                inmate is housed for potential
+                                                                                changes</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="TextStyleRed">If you are a victim of
+                                                                            crime, please call or email the Office of
+                                                                            Victim Services for assistance with your
+                                                                            victim rights or concerns: 602-542-1853
+                                                                            azvictims@azadc.gov </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="TextStyleBlack">Details of inmate
+                                                                            offenses can be accessed by reviewing the
+                                                                            case file at the Office of the Clerk of the
+                                                                            Court where the case was adjudicated. </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbCommitment" class="LabelHeader">Commitment and Sentence
+                                                Information </span>
+                                            <span id="lblCommit" class="LabelSubHeader">2 records</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+
+                                            <div>
+                                                <table class="BorderGridView" cellspacing="0" cellpadding="1"
+                                                    align="Left" rules="all" border="1" id="GVCommitment"
+                                                    style="width:597px;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr class="GridViewHead" align="left">
+                                                            <th align="left" scope="col"
+                                                                style="font-family:Arial;font-size:Small;">Commit#</th>
+                                                            <th align="left" scope="col"
+                                                                style="font-family:Arial;font-size:Small;"> Sentence
+                                                                Length</th>
+                                                            <th align="left" scope="col">Sentence County</th>
+                                                            <th align="left" scope="col">Court Cause#</th>
+                                                            <th align="left" scope="col">Offense Date</th>
+                                                            <th align="left" scope="col">Sentence Date</th>
+                                                            <th align="left" scope="col">Sentence Status</th>
+                                                            <th align="left" scope="col">Crime</th>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>
+                                                                <span id="GVCommitment_ctl02_lblCommitItem">A01</span>
+                                                            </td>
+                                                            <td>008 Y/06 M/00 D</td>
+                                                            <td>Pima County</td>
+                                                            <td>20213338-002</td>
+                                                            <td>
+                                                                <span
+                                                                    id="GVCommitment_ctl02_lblOffendDateItem">08/17/2021</span>
+                                                            </td>
+                                                            <td>09/15/2023</td>
+                                                            <td>
+                                                                <span
+                                                                    id="GVCommitment_ctl02_LblSentenceStatusItem">Imposed</span>
+                                                            </td>
+                                                            <td align="left">
+                                                                <span id="GVCommitment_ctl02_lblCrimeItem">AGGRAVATED
+                                                                    ASSAULT</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left"
+                                                            style="background-color:Gainsboro;">
+                                                            <td>
+                                                                <span id="GVCommitment_ctl03_lblCommitItem">B01</span>
+                                                            </td>
+                                                            <td>001 Y/06 M/00 D</td>
+                                                            <td>Pima County</td>
+                                                            <td>20232026-001</td>
+                                                            <td>
+                                                                <span
+                                                                    id="GVCommitment_ctl03_lblOffendDateItem">05/10/2023</span>
+                                                            </td>
+                                                            <td>09/15/2023</td>
+                                                            <td>
+                                                                <span
+                                                                    id="GVCommitment_ctl03_LblSentenceStatusItem">Imposed</span>
+                                                            </td>
+                                                            <td align="left">
+                                                                <span id="GVCommitment_ctl03_lblCrimeItem">ATTEMPTED
+                                                                    ROBBERY</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbInfraction" class="LabelHeader">Disciplinary Infractions</span>
+                                            <span id="lblInfraction" class="LabelSubHeader">3 records</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style=" text-align: left;">
+                                            <div>
+                                                <table class="BorderGridView" cellspacing="0" cellpadding="1"
+                                                    align="Left" rules="all" border="1" id="GVInfractions"
+                                                    style="width:597px;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr class="GridViewHead" align="left">
+                                                            <th align="left" scope="col">Violation Date</th>
+                                                            <th align="left" scope="col">Infraction</th>
+                                                            <th align="left" scope="col">Verdict Date</th>
+                                                            <th align="left" scope="col">Verdict</th>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>02/09/2025</td>
+                                                            <td align="left">Possession of a Weapon</td>
+                                                            <td>02/25/2025</td>
+                                                            <td align="left">Major - Guilty</td>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left"
+                                                            style="background-color:Gainsboro;">
+                                                            <td>02/03/2025</td>
+                                                            <td align="left">Threatening or Intimidating</td>
+                                                            <td>02/25/2025</td>
+                                                            <td align="left">Major - Guilty</td>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>01/09/2025</td>
+                                                            <td align="left">Fighting</td>
+                                                            <td>01/24/2025</td>
+                                                            <td align="left">Major - Guilty</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbAppeal" class="LabelHeader">Disciplinary Appeals</span>
+                                            <span id="lblOutcome" class="LabelSubHeader">0 record</span>
+                                            <a id="HyperLink2" class="LabelSubHeader"
+                                                href="https://corrections.az.gov/sites/default/files/policies/800/0803_102421.pdf"
+                                                target="_blank">[Info]</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbProfile" class="LabelHeader">Profile Classification</span>
+                                            <span id="lblProfile" class="LabelSubHeader">2 records</span>
+                                            <a id="hplProfile" class="LabelSubHeader" href="pclass.htm"
+                                                target="_blank">[Info]</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <div>
+                                                <table class="BorderGridView" cellspacing="0" cellpadding="1"
+                                                    align="Left" rules="all" border="1" id="GVProfileClass"
+                                                    style="background-color:White;width:597px;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr class="GridViewHead" align="left">
+                                                            <th align="left" scope="col">Complete Date</th>
+                                                            <th align="left" scope="col">Classification Type</th>
+                                                            <th align="left" scope="col">Custody Risk</th>
+                                                            <th align="left" scope="col">Internal Risk</th>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>Active Classification</td>
+                                                            <td align="left">Reclassification</td>
+                                                            <td>Close</td>
+                                                            <td>High</td>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left"
+                                                            style="background-color:Gainsboro;">
+                                                            <td>03/10/2025</td>
+                                                            <td align="left">Initial Classification</td>
+                                                            <td>Medium</td>
+                                                            <td>Moderate</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbAction" class="LabelHeader">Parole Action</span>
+                                            <span id="lblParolAction" class="LabelSubHeader">0 record</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbWork" class="LabelHeader">Work Program</span>
+                                            <span id="lblWork" class="LabelSubHeader">1 records</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <table class="BorderGridView" cellspacing="0" cellpadding="1"
+                                                    rules="all" border="1" id="GVWorkProgram"
+                                                    style="width:597px;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr class="GridViewHead" align="left">
+                                                            <th align="left" scope="col">Assigned Date</th>
+                                                            <th align="left" scope="col">Completed Date</th>
+                                                            <th align="left" scope="col">Work Assignment</th>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>12/19/2024</td>
+                                                            <td>12/24/2024</td>
+                                                            <td align="left">1 Orientation</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <span id="lbDetainer" class="LabelHeader">Notification Requests, Detainers,
+                                                and/or Warrants</span>
+                                            <span id="lblDetainer" class="LabelSubHeader">1 records</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <table class="BorderGridView" cellspacing="0" cellpadding="1"
+                                                    align="Left" rules="all" border="1" id="GVDetainer"
+                                                    style="width:597px;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr class="GridViewHead" align="left">
+                                                            <th align="left" scope="col">Detainer Date</th>
+                                                            <th align="left" scope="col">Detainer Type</th>
+                                                            <th align="left" scope="col">Charges</th>
+                                                            <th align="left" scope="col">Authority</th>
+                                                            <th align="left" scope="col">Agreement Date</th>
+                                                        </tr>
+                                                        <tr class="GridViewRow" align="left">
+                                                            <td>09/20/2023</td>
+                                                            <td align="left">Notification Request</td>
+                                                            <td align="left">20213338002-20213521002</td>
+                                                            <td align="left">In State Probation</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <script type="text/javascript">
+            //<![CDATA[
+            WebForm_AutoFocus('txtNumber');//]]>
+        </script>
+    </form>
+
+
+    <div id="hl-aria-live-message-container" aria-live="polite" class="visually-hidden"></div>
+    <div id="hl-aria-live-alert-container" role="alert" aria-live="assertive" class="visually-hidden"></div>
+</body>
+
+</html>
